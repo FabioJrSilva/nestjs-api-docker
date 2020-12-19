@@ -6,19 +6,24 @@ import {
   Unique,
 } from 'typeorm';
 import * as bcrypt from 'bcrypt';
+import { ApiProperty } from '@nestjs/swagger';
 
 @Entity()
 @Unique(['email'])
 export class User {
+  @ApiProperty()
   @PrimaryGeneratedColumn()
   id: number;
 
+  @ApiProperty()
   @Column({ nullable: false, type: 'varchar', length: 255 })
   email: string;
 
+  @ApiProperty()
   @Column({ nullable: false, type: 'varchar', length: 255 })
   name: string;
 
+  @ApiProperty()
   @Column({ nullable: false })
   password: string;
 

@@ -3,11 +3,14 @@ import {
   Controller,
   Delete,
   Get,
+  HttpCode,
   Param,
   Patch,
   Post,
   Query,
 } from '@nestjs/common';
+import { ApiOkResponse } from '@nestjs/swagger';
+import { User } from 'src/models/user.model';
 import { CreateUserDto } from './dtos/create.user.dto';
 import { FindUsersQueryDto } from './dtos/find.user.query.dto';
 import { ReturnUserDto } from './dtos/return.user.dto';
@@ -38,6 +41,7 @@ export class UserController {
     };
   }
 
+  @ApiOkResponse({ type: ReturnUserDto })
   @Get(':id')
   async findUserById(@Param('id') id: number): Promise<ReturnUserDto> {
     const user = await this.userService.findUserById(id);
@@ -48,20 +52,18 @@ export class UserController {
     };
   }
 
+  @ApiOkResponse({ type: UpdateUserDto })
   @Patch(':id')
   async updateUser(
     @Body() updateUserDto: UpdateUserDto,
     @Param('id') id: number
-  ) {
+  ): Promise<UpdateUserDto> {
     return this.userService.updateUser(updateUserDto, id);
   }
 
   @Delete(':id')
+  @HttpCode(204)
   async deleteUser(@Param('id') id: number) {
-    await this.userService.deleteUser(id);
-
-    return {
-      message: 'Usuário removido com sucesso',
-    };
+    return this.userService.deleteUser(id);
   }
 }
