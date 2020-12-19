@@ -8,6 +8,7 @@ import { EntityRepository, Repository } from 'typeorm';
 import { CreateUserDto } from './dtos/create.user.dto';
 import { User } from '../models/user.model';
 import { FindUsersQueryDto } from './dtos/find.user.query.dto';
+import { CredentialsDto } from 'src/auth/dtos/credentials.dto';
 
 @EntityRepository(User)
 export class UserRepository extends Repository<User> {
@@ -61,6 +62,17 @@ export class UserRepository extends Repository<User> {
     const [users, total] = await query.getManyAndCount();
 
     return { users, total };
+  }
+
+  async checkCredentials(credentialsDto: CredentialsDto): Promise<User> {
+    const { email, password } = credentialsDto;
+    const user = await this.findOne({ email });
+
+    if (user && (await user.checkPassword(password))) {
+      return user;
+    }
+
+    return null;
   }
 
   private async hashPassword(password: string, salt: string): Promise<string> {
