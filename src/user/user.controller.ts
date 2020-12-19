@@ -10,7 +10,6 @@ import {
   Query,
 } from '@nestjs/common';
 import { ApiOkResponse } from '@nestjs/swagger';
-import { User } from 'src/models/user.model';
 import { CreateUserDto } from './dtos/create.user.dto';
 import { FindUsersQueryDto } from './dtos/find.user.query.dto';
 import { ReturnUserDto } from './dtos/return.user.dto';

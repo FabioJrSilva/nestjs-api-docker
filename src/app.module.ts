@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import typeOrmConfig from './configs/typeorm.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
+import { LoanCategoriesModule } from './loan-categories/loan-categories.module';
 
 @Module({
   imports: [
@@ -16,6 +17,7 @@ import { AuthModule } from './auth/auth.module';
     TypeOrmModule.forRoot(typeOrmConfig()),
     UserModule,
     AuthModule,
+    LoanCategoriesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
