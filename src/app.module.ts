@@ -8,6 +8,10 @@ import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { LoanCategoriesModule } from './loan-categories/loan-categories.module';
 import { LoanSimulationModule } from './loan-simulation/loan-simulation.module';
+import { WinstonModule } from 'nest-winston';
+import { winstonConfig } from './configs/winston.config';
+import { APP_INTERCEPTOR } from '@nestjs/core';
+import { LoggerInterceptor } from './interceptors/logger.interceptor';
 
 @Module({
   imports: [
@@ -16,12 +20,19 @@ import { LoanSimulationModule } from './loan-simulation/loan-simulation.module';
       envFilePath: '.env',
     }),
     TypeOrmModule.forRoot(typeOrmConfig()),
+    WinstonModule.forRoot(winstonConfig),
     UserModule,
     AuthModule,
     LoanCategoriesModule,
     LoanSimulationModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [
+    AppService,
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: LoggerInterceptor,
+    },
+  ],
 })
 export class AppModule {}
