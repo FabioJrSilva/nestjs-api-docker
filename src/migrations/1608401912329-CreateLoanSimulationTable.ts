@@ -45,6 +45,11 @@ export class CreateLoanSimulationTable1608401912329
             isNullable: false,
           },
           {
+            name: 'sex',
+            type: 'varchar',
+            isNullable: false,
+          },
+          {
             name: 'created_at',
             type: 'timestamp',
             default: 'CURRENT_TIMESTAMP',

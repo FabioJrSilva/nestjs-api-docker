@@ -7,6 +7,7 @@ import typeOrmConfig from './configs/typeorm.config';
 import { UserModule } from './user/user.module';
 import { AuthModule } from './auth/auth.module';
 import { LoanCategoriesModule } from './loan-categories/loan-categories.module';
+import { LoanSimulationModule } from './loan-simulation/loan-simulation.module';
 
 @Module({
   imports: [
@@ -18,6 +19,7 @@ import { LoanCategoriesModule } from './loan-categories/loan-categories.module';
     UserModule,
     AuthModule,
     LoanCategoriesModule,
+    LoanSimulationModule,
   ],
   controllers: [AppController],
   providers: [AppService],

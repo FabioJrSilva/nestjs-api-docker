@@ -1,5 +1,6 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import { LoanCategories } from 'src/models/LoanCategories';
+import { LoanSimulation } from 'src/models/LoanSimulation';
 import { User } from 'src/models/user.model';
 
 export default () => {
@@ -11,7 +12,7 @@ export default () => {
     username: process.env.TYPEORM_USERNAME,
     password: process.env.TYPEORM_PASSWORD,
     database: process.env.TYPEORM_DATABASE,
-    entities: [User, LoanCategories],
+    entities: [User, LoanCategories, LoanSimulation],
     synchronize: true,
     migrations: [__dirname + '/../**/*.migrations.{js,ts}'],
   };
