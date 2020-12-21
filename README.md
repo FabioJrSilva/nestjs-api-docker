@@ -48,3 +48,10 @@ $ npm run typeorm migration:run
 # unit tests
 $ npm run test
 ```
+
+## Documentation
+
+```bash
+# documentation
+http://localhost:3000/api
+```
