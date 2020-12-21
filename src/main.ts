@@ -8,6 +8,7 @@ import { winstonConfig } from './configs/winston.config';
 async function bootstrap() {
   const logger = WinstonModule.createLogger(winstonConfig);
   const app = await NestFactory.create(AppModule, { logger });
+  await app.enableCors();
   await app.useGlobalPipes(new ValidationPipe());
   const options = new DocumentBuilder()
     .setTitle('Nestjs API')
